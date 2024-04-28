@@ -1,0 +1,330 @@
+definitions:
+  auth.LoginDto:
+    properties:
+      email:
+        type: string
+      password:
+        maxLength: 90
+        minLength: 8
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  auth.PasswordDto:
+    properties:
+      current_password:
+        maxLength: 90
+        minLength: 8
+        type: string
+      new_password:
+        maxLength: 90
+        minLength: 8
+        type: string
+    required:
+    - current_password
+    - new_password
+    type: object
+  auth.RefreshDto:
+    properties:
+      access_token:
+        maxLength: 50
+        minLength: 30
+        type: string
+      refresh_token:
+        maxLength: 50
+        minLength: 30
+        type: string
+    required:
+    - access_token
+    - refresh_token
+    type: object
+  auth.RegisterDto:
+    properties:
+      email:
+        type: string
+      name:
+        maxLength: 190
+        minLength: 2
+        type: string
+      password:
+        maxLength: 90
+        minLength: 8
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  auth.Tokens:
+    properties:
+      access_token:
+        type: string
+      expires_at:
+        type: string
+      refresh_token:
+        type: string
+    type: object
+  auth.TokensResponseType:
+    properties:
+      tokens:
+        $ref: '#/definitions/auth.Tokens'
+    type: object
+  core.Response-auth_TokensResponseType:
+    properties:
+      data:
+        $ref: '#/definitions/auth.TokensResponseType'
+      errors:
+        type: object
+      message:
+        type: string
+    type: object
+  core.Response-users_UserResponseType:
+    properties:
+      data:
+        $ref: '#/definitions/users.UserResponseType'
+      errors:
+        type: object
+      message:
+        type: string
+    type: object
+  core.Response-users_UsersMetaResponseType:
+    properties:
+      data:
+        $ref: '#/definitions/users.UsersMetaResponseType'
+      errors:
+        type: object
+      message:
+        type: string
+    type: object
+  core.SuccessResponse:
+    properties:
+      data:
+        type: object
+      errors:
+        type: object
+      message:
+        type: string
+    type: object
+  db_scopes.PaginateMetadata:
+    properties:
+      page:
+        type: integer
+      take:
+        type: integer
+      total_pages:
+        type: integer
+      total_rows:
+        type: integer
+    type: object
+  users.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  users.UserResponseType:
+    properties:
+      user:
+        $ref: '#/definitions/users.User'
+    type: object
+  users.UsersMetaResponseType:
+    properties:
+      meta:
+        $ref: '#/definitions/db_scopes.PaginateMetadata'
+      users:
+        items:
+          $ref: '#/definitions/users.User'
+        type: array
+    type: object
+info:
+  contact: {}
+paths:
+  /api:
+    get:
+      responses: {}
+      summary: app route, get heathy status
+      tags:
+      - App
+  /api/v1/auth/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Login inputs
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth.LoginDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.Response-auth_TokensResponseType'
+      summary: login api
+      tags:
+      - Auth
+  /api/v1/auth/logout:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.SuccessResponse'
+      security:
+      - Bearer: []
+      summary: logout user
+      tags:
+      - Auth
+  /api/v1/auth/password:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Change password inputs
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth.PasswordDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.SuccessResponse'
+      security:
+      - Bearer: []
+      summary: change logged in user password
+      tags:
+      - Auth
+  /api/v1/auth/refresh:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Refresh tokens inputs
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth.RefreshDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.Response-auth_TokensResponseType'
+      summary: refresh tokens api
+      tags:
+      - Auth
+  /api/v1/auth/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Register inputs
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth.RegisterDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.SuccessResponse'
+      summary: register api
+      tags:
+      - Auth
+  /api/v1/auth/user:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.Response-users_UserResponseType'
+      security:
+      - Bearer: []
+      summary: fetch logged in user info
+      tags:
+      - Auth
+  /api/v1/users:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: search on user name
+        in: query
+        name: search
+        type: string
+      - description: pagination page_value, default 1
+        in: query
+        name: page
+        type: string
+      - description: pagination take_value, default 20
+        in: query
+        name: take
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.Response-users_UsersMetaResponseType'
+      security:
+      - Bearer: []
+      summary: get list of users
+      tags:
+      - Users
+  /api/v1/users/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.Response-users_UserResponseType'
+      security:
+      - Bearer: []
+      summary: get user by id
+      tags:
+      - Users
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
