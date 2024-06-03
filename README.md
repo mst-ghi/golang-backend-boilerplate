@@ -22,8 +22,8 @@ With these features, the Golang Backend Boilerplate offers a robust and flexible
 
 ```bash
 -> go install github.com/swaggo/swag/cmd/swag@latest
--> git clone git@github.com:mst-ghi/app.git
--> cd ./app
+-> git clone https://github.com/mst-ghi/golang-backend-boilerplate.git
+-> cd ./golang-backend-boilerplate
 -> cp .env.example .env #Update Database configuration
 -> go mod download
 -> go run . db:migrate
