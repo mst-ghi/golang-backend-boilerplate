@@ -59,12 +59,13 @@ SocketIO is accessible via the URL path **/socket.io/\***, providing seamless in
 ## Source structure
 
 1. **core**:
+
     - **bootstrap**: Initializes the application.
     - **cmd**: Houses command-line interface (CLI) commands for tasks like database migration and seeding.
     - **config**: Manages application configuration settings.
     - **engine**: Initializes and configures the application engine.
-    - **middlewares**: Includes middleware functions for handling cross-origin resource sharing (CORS) and JSON Web Token (JWT) authentication.
     - **swagger**: Handles Swagger documentation setup.
+
 2. **database**:
     - **db_drivers**: Contains database driver implementations.
     - **db_scopes**: Defines database query scopes.
@@ -77,6 +78,8 @@ SocketIO is accessible via the URL path **/socket.io/\***, providing seamless in
     - **docs.go**: Initializes documentation generation.
     - **swagger.json/yaml**: Generated Swagger documentation files.
 4. **internal**:
+
+    - **middlewares**: Includes middleware functions for handling cross-origin resource sharing (CORS) and JSON Web Token (JWT) authentication.
     - **modules**: Contains app-specific logic and business logic.
         - **auth**: Handles authentication-related logic, including controllers, services, and routes.
         - **gateway**: Implements gateway logic and handlers.
@@ -85,6 +88,7 @@ SocketIO is accessible via the URL path **/socket.io/\***, providing seamless in
     - **scheduler**: Manages scheduled tasks or jobs.
     - **kernel.go**: Initializes the application kernel.
     - **provider.go**: Manages dependency injection and service providers.
+
 5. **pkg**:
     - **handlers**: Provides error handling utilities.
     - **helpers**: Contains helper functions for common tasks like data conversion and cryptography.

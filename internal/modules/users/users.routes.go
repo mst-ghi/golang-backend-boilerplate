@@ -1,7 +1,7 @@
 package users
 
 import (
-	"app/core/middlewares"
+	"app/internal/middlewares"
 
 	"github.com/gin-gonic/gin"
 )

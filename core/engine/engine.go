@@ -2,8 +2,8 @@ package engine
 
 import (
 	"app/core/config"
-	"app/core/middlewares"
 	"app/core/swagger"
+	"app/internal/middlewares"
 	app "app/internal/modules"
 	"app/pkg/handlers"
 
