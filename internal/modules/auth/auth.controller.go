@@ -1,20 +1,20 @@
 package auth
 
 import (
-	core "app/core"
-	"app/domain/users"
+	"app/internal"
+	"app/internal/modules/users"
 
 	"github.com/gin-gonic/gin"
 )
 
 type AuthController struct {
-	root    *core.Controller
+	root    *internal.Controller
 	service AuthServiceInterface
 }
 
 func NewAuthController() *AuthController {
 	return &AuthController{
-		root:    core.GetController(),
+		root:    internal.GetController(),
 		service: NewAuthService(),
 	}
 }
@@ -24,7 +24,7 @@ func NewAuthController() *AuthController {
 // @summary login api
 // @accept  json
 // @produce json
-// @success 200 {object} core.Response[TokensResponseType]
+// @success 200 {object} internal.Response[TokensResponseType]
 // @param   request body LoginDto true "Login inputs"
 func (ctrl *AuthController) Login(c *gin.Context) {
 	var data LoginDto
@@ -49,7 +49,7 @@ func (ctrl *AuthController) Login(c *gin.Context) {
 // @summary register api
 // @accept  json
 // @produce json
-// @success 200 {object} core.SuccessResponse
+// @success 200 {object} internal.SuccessResponse
 // @param   request body RegisterDto true "Register inputs"
 func (ctrl *AuthController) Register(c *gin.Context) {
 	var dto RegisterDto
@@ -72,7 +72,7 @@ func (ctrl *AuthController) Register(c *gin.Context) {
 // @summary refresh tokens api
 // @accept  json
 // @produce json
-// @success 200 {object} core.Response[TokensResponseType]
+// @success 200 {object} internal.Response[TokensResponseType]
 // @param   request body RefreshDto true "Refresh tokens inputs"
 func (ctrl *AuthController) Refresh(c *gin.Context) {
 	var data RefreshDto
@@ -98,9 +98,9 @@ func (ctrl *AuthController) Refresh(c *gin.Context) {
 // @summary  fetch logged in user info
 // @accept   json
 // @produce  json
-// @success  200 {object} core.Response[users.UserResponseType]
+// @success  200 {object} internal.Response[users.UserResponseType]
 func (ctrl *AuthController) User(c *gin.Context) {
-	user := core.User(c)
+	user := internal.User(c)
 	ctrl.root.Success(c, users.UserResponse(user))
 }
 
@@ -110,9 +110,9 @@ func (ctrl *AuthController) User(c *gin.Context) {
 // @summary  logout user
 // @accept   json
 // @produce  json
-// @success  200 {object} core.SuccessResponse
+// @success  200 {object} internal.SuccessResponse
 func (ctrl *AuthController) Logout(c *gin.Context) {
-	ctrl.service.Logout(core.Token(c))
+	ctrl.service.Logout(internal.Token(c))
 	ctrl.root.Success(c, nil)
 }
 
@@ -122,7 +122,7 @@ func (ctrl *AuthController) Logout(c *gin.Context) {
 // @summary  change logged in user password
 // @accept   json
 // @produce  json
-// @success  200 {object} core.SuccessResponse
+// @success  200 {object} internal.SuccessResponse
 // @param   request body PasswordDto true "Change password inputs"
 func (ctrl *AuthController) ChangePassword(c *gin.Context) {
 	var dto PasswordDto
@@ -132,7 +132,7 @@ func (ctrl *AuthController) ChangePassword(c *gin.Context) {
 		return
 	}
 
-	user := core.User(c)
+	user := internal.User(c)
 	err := ctrl.service.ChangePassword(user, dto)
 
 	if err != nil {

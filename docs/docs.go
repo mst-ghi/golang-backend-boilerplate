@@ -51,7 +51,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/core.Response-auth_TokensResponseType"
+                            "$ref": "#/definitions/internal.Response-auth_TokensResponseType"
                         }
                     }
                 }
@@ -78,7 +78,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/core.SuccessResponse"
+                            "$ref": "#/definitions/internal.SuccessResponse"
                         }
                     }
                 }
@@ -116,7 +116,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/core.SuccessResponse"
+                            "$ref": "#/definitions/internal.SuccessResponse"
                         }
                     }
                 }
@@ -149,7 +149,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/core.Response-auth_TokensResponseType"
+                            "$ref": "#/definitions/internal.Response-auth_TokensResponseType"
                         }
                     }
                 }
@@ -182,7 +182,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/core.SuccessResponse"
+                            "$ref": "#/definitions/internal.SuccessResponse"
                         }
                     }
                 }
@@ -209,7 +209,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/core.Response-users_UserResponseType"
+                            "$ref": "#/definitions/internal.Response-users_UserResponseType"
                         }
                     }
                 }
@@ -256,7 +256,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/core.Response-users_UsersMetaResponseType"
+                            "$ref": "#/definitions/internal.Response-users_UsersMetaResponseType"
                         }
                     }
                 }
@@ -292,7 +292,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/core.Response-users_UserResponseType"
+                            "$ref": "#/definitions/internal.Response-users_UserResponseType"
                         }
                     }
                 }
@@ -400,62 +400,6 @@ const docTemplate = `{
                 }
             }
         },
-        "core.Response-auth_TokensResponseType": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/auth.TokensResponseType"
-                },
-                "errors": {
-                    "type": "object"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "core.Response-users_UserResponseType": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/users.UserResponseType"
-                },
-                "errors": {
-                    "type": "object"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "core.Response-users_UsersMetaResponseType": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/users.UsersMetaResponseType"
-                },
-                "errors": {
-                    "type": "object"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "core.SuccessResponse": {
-            "type": "object",
-            "properties": {
-                "data": {
-                    "type": "object"
-                },
-                "errors": {
-                    "type": "object"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
         "db_scopes.PaginateMetadata": {
             "type": "object",
             "properties": {
@@ -470,6 +414,62 @@ const docTemplate = `{
                 },
                 "total_rows": {
                     "type": "integer"
+                }
+            }
+        },
+        "internal.Response-auth_TokensResponseType": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/auth.TokensResponseType"
+                },
+                "errors": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Response-users_UserResponseType": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/users.UserResponseType"
+                },
+                "errors": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.Response-users_UsersMetaResponseType": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/users.UsersMetaResponseType"
+                },
+                "errors": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal.SuccessResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object"
+                },
+                "errors": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
                 }
             }
         },

@@ -70,42 +70,6 @@ definitions:
       tokens:
         $ref: '#/definitions/auth.Tokens'
     type: object
-  core.Response-auth_TokensResponseType:
-    properties:
-      data:
-        $ref: '#/definitions/auth.TokensResponseType'
-      errors:
-        type: object
-      message:
-        type: string
-    type: object
-  core.Response-users_UserResponseType:
-    properties:
-      data:
-        $ref: '#/definitions/users.UserResponseType'
-      errors:
-        type: object
-      message:
-        type: string
-    type: object
-  core.Response-users_UsersMetaResponseType:
-    properties:
-      data:
-        $ref: '#/definitions/users.UsersMetaResponseType'
-      errors:
-        type: object
-      message:
-        type: string
-    type: object
-  core.SuccessResponse:
-    properties:
-      data:
-        type: object
-      errors:
-        type: object
-      message:
-        type: string
-    type: object
   db_scopes.PaginateMetadata:
     properties:
       page:
@@ -116,6 +80,42 @@ definitions:
         type: integer
       total_rows:
         type: integer
+    type: object
+  internal.Response-auth_TokensResponseType:
+    properties:
+      data:
+        $ref: '#/definitions/auth.TokensResponseType'
+      errors:
+        type: object
+      message:
+        type: string
+    type: object
+  internal.Response-users_UserResponseType:
+    properties:
+      data:
+        $ref: '#/definitions/users.UserResponseType'
+      errors:
+        type: object
+      message:
+        type: string
+    type: object
+  internal.Response-users_UsersMetaResponseType:
+    properties:
+      data:
+        $ref: '#/definitions/users.UsersMetaResponseType'
+      errors:
+        type: object
+      message:
+        type: string
+    type: object
+  internal.SuccessResponse:
+    properties:
+      data:
+        type: object
+      errors:
+        type: object
+      message:
+        type: string
     type: object
   users.User:
     properties:
@@ -170,7 +170,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/core.Response-auth_TokensResponseType'
+            $ref: '#/definitions/internal.Response-auth_TokensResponseType'
       summary: login api
       tags:
       - Auth
@@ -184,7 +184,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/core.SuccessResponse'
+            $ref: '#/definitions/internal.SuccessResponse'
       security:
       - Bearer: []
       summary: logout user
@@ -207,7 +207,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/core.SuccessResponse'
+            $ref: '#/definitions/internal.SuccessResponse'
       security:
       - Bearer: []
       summary: change logged in user password
@@ -230,7 +230,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/core.Response-auth_TokensResponseType'
+            $ref: '#/definitions/internal.Response-auth_TokensResponseType'
       summary: refresh tokens api
       tags:
       - Auth
@@ -251,7 +251,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/core.SuccessResponse'
+            $ref: '#/definitions/internal.SuccessResponse'
       summary: register api
       tags:
       - Auth
@@ -265,7 +265,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/core.Response-users_UserResponseType'
+            $ref: '#/definitions/internal.Response-users_UserResponseType'
       security:
       - Bearer: []
       summary: fetch logged in user info
@@ -294,7 +294,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/core.Response-users_UsersMetaResponseType'
+            $ref: '#/definitions/internal.Response-users_UsersMetaResponseType'
       security:
       - Bearer: []
       summary: get list of users
@@ -316,7 +316,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/core.Response-users_UserResponseType'
+            $ref: '#/definitions/internal.Response-users_UserResponseType'
       security:
       - Bearer: []
       summary: get user by id

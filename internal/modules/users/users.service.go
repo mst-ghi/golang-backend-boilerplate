@@ -1,14 +1,14 @@
 package users
 
 import (
-	"app/core"
 	"app/database/db_scopes"
 	"app/database/models"
 	"app/database/repositories"
+	"app/internal"
 )
 
 type UsersServiceInterface interface {
-	FindOne(id string) (models.User, core.Error)
+	FindOne(id string) (models.User, internal.Error)
 	FindAll(search string, page, take int) ([]models.User, db_scopes.PaginateMetadata)
 }
 
@@ -22,11 +22,11 @@ func NewUsersService() *UsersService {
 	}
 }
 
-func (service *UsersService) FindOne(id string) (models.User, core.Error) {
+func (service *UsersService) FindOne(id string) (models.User, internal.Error) {
 	user := service.repository.FindByID(id)
 
 	if user.ID == "" {
-		return user, core.Error{"reason": "User not found"}
+		return user, internal.Error{"reason": "User not found"}
 	}
 
 	return user, nil

@@ -1,19 +1,19 @@
 package users
 
 import (
-	"app/core"
+	"app/internal"
 
 	"github.com/gin-gonic/gin"
 )
 
 type UsersController struct {
-	root    *core.Controller
+	root    *internal.Controller
 	service UsersServiceInterface
 }
 
 func NewUsersController() *UsersController {
 	return &UsersController{
-		root:    core.GetController(),
+		root:    internal.GetController(),
 		service: NewUsersService(),
 	}
 }
@@ -27,9 +27,9 @@ func NewUsersController() *UsersController {
 // @Param    search query string false "search on user name"
 // @Param    page query string false "pagination page_value, default 1"
 // @Param    take query string false "pagination take_value, default 20"
-// @success  200 {object} core.Response[UsersMetaResponseType]
+// @success  200 {object} internal.Response[UsersMetaResponseType]
 func (ctrl *UsersController) FindAll(c *gin.Context) {
-	search, page, take := core.PaginateQueries(c)
+	search, page, take := internal.PaginateQueries(c)
 	users, meta := ctrl.service.FindAll(search, page, take)
 	ctrl.root.Success(c, UsersMetaResponse(users, meta))
 }
@@ -40,7 +40,7 @@ func (ctrl *UsersController) FindAll(c *gin.Context) {
 // @summary  get user by id
 // @accept   json
 // @produce  json
-// @success  200 {object} core.Response[UserResponseType]
+// @success  200 {object} internal.Response[UserResponseType]
 // @param    id path string true "User ID"
 func (ctrl *UsersController) FindOne(c *gin.Context) {
 	user, err := ctrl.service.FindOne(c.Param("id"))

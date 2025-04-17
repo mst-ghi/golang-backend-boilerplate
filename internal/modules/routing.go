@@ -1,9 +1,9 @@
-package domain
+package app
 
 import (
-	"app/core"
-	"app/domain/auth"
-	"app/domain/users"
+	"app/internal"
+	"app/internal/modules/auth"
+	"app/internal/modules/users"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,7 +12,7 @@ import (
 // @router	/api [get]
 // @summary	app route, get heathy status
 func HomeRoute(c *gin.Context) {
-	ctrl := core.GetController()
+	ctrl := internal.GetController()
 	ctrl.Success(c, map[string]string{
 		"heathy": "I'm OK...",
 	})

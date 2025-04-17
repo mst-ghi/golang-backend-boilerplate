@@ -4,7 +4,7 @@ import (
 	"app/core/config"
 	"app/core/middlewares"
 	"app/core/swagger"
-	"app/domain"
+	app "app/internal/modules"
 	"app/pkg/handlers"
 
 	"github.com/gin-gonic/gin"
@@ -41,7 +41,7 @@ func Serve(addr ...string) {
 func RegisterRoutes() {
 	routerGroup := GetEngine().Group("api")
 
-	domain.RegisterRoutes(routerGroup)
+	app.RegisterRoutes(routerGroup)
 
 	swagger.RegisterSwagger(routerGroup)
 }

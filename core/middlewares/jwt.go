@@ -1,8 +1,8 @@
 package middlewares
 
 import (
-	"app/core"
 	"app/database/repositories"
+	"app/internal"
 	"app/pkg/messages"
 	"errors"
 	"net/http"
@@ -29,7 +29,7 @@ func Auth(c *gin.Context) {
 	accessToken, err := extractBearerToken(c.GetHeader("Authorization"))
 
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, core.ToResponse(
+		c.AbortWithStatusJSON(http.StatusUnauthorized, internal.ToResponse(
 			messages.MessageInvalidToken,
 			map[string]any{},
 			map[string]any{},
@@ -41,7 +41,7 @@ func Auth(c *gin.Context) {
 	token := tokenRepo.FindByAccess(accessToken)
 
 	if token.ID == "" || token.User.ID == "" {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, core.ToResponse(
+		c.AbortWithStatusJSON(http.StatusUnauthorized, internal.ToResponse(
 			messages.MessageInvalidToken,
 			map[string]any{},
 			map[string]any{},

@@ -33,7 +33,7 @@ With these features, the Golang Backend Boilerplate offers a robust and flexible
 ## Commands
 
 -   **serve**: Starts the application server, allowing it to handle incoming requests and serve content to clients.
--   **swag:init**: Initiates the generation process for Swagger documentation, facilitating comprehensive API documentation for better understanding and integration.
+-   **swag**: Initiates the generation process for Swagger documentation, facilitating comprehensive API documentation for better understanding and integration.
 -   **db:migrate**: Executes database table migrations, ensuring that the database structure is up-to-date with the latest changes in the application.
 -   **db:seeder**: Inserts seed data into the database, providing initial data for development, testing, or demonstration purposes. This helps populate the database with predefined data for a smoother setup and testing process.
 
@@ -58,17 +58,14 @@ SocketIO is accessible via the URL path **/socket.io/\***, providing seamless in
 
 ## Source structure
 
-1. **core**: Contains core application logic and infrastructure code.
+1. **core**:
     - **bootstrap**: Initializes the application.
     - **cmd**: Houses command-line interface (CLI) commands for tasks like database migration and seeding.
     - **config**: Manages application configuration settings.
     - **engine**: Initializes and configures the application engine.
     - **middlewares**: Includes middleware functions for handling cross-origin resource sharing (CORS) and JSON Web Token (JWT) authentication.
-    - **scheduler**: Manages scheduled tasks or jobs.
     - **swagger**: Handles Swagger documentation setup.
-    - **kernel.go**: Initializes the application kernel.
-    - **provider.go**: Manages dependency injection and service providers.
-2. **database**: Handles database-related logic and operations.
+2. **database**:
     - **db_drivers**: Contains database driver implementations.
     - **db_scopes**: Defines database query scopes.
     - **migrations**: Manages database schema migrations.
@@ -76,15 +73,19 @@ SocketIO is accessible via the URL path **/socket.io/\***, providing seamless in
     - **repositories**: Contains repository implementations for database operations.
     - **seeder**: Manages seed data for populating the database.
     - **database.go**: Initializes the database connection and ORM.
-3. docs: Stores documentation-related files.
+3. docs:
     - **docs.go**: Initializes documentation generation.
     - **swagger.json/yaml**: Generated Swagger documentation files.
-4. **domain**: Contains domain-specific logic and business logic.
-    - **auth**: Handles authentication-related logic, including controllers, services, and routes.
-    - **gateway**: Implements gateway logic and handlers.
-    - **users**: Manages user-related logic, including controllers, services, and routes.
-    - **routing.go**: Initializes application routes and routing logic.
-5. **pkg**: Houses reusable packages and utilities.
+4. **internal**:
+    - **modules**: Contains app-specific logic and business logic.
+        - **auth**: Handles authentication-related logic, including controllers, services, and routes.
+        - **gateway**: Implements gateway logic and handlers.
+        - **users**: Manages user-related logic, including controllers, services, and routes.
+        - **routing.go**: Initializes application routes and routing logic.
+    - **scheduler**: Manages scheduled tasks or jobs.
+    - **kernel.go**: Initializes the application kernel.
+    - **provider.go**: Manages dependency injection and service providers.
+5. **pkg**:
     - **handlers**: Provides error handling utilities.
     - **helpers**: Contains helper functions for common tasks like data conversion and cryptography.
     - **messages**: Defines message constants and utilities for message formatting.

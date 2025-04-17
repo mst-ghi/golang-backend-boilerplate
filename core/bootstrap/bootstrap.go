@@ -1,19 +1,19 @@
 package bootstrap
 
 import (
-	"app/core"
 	"app/core/config"
 	"app/core/engine"
-	"app/core/scheduler"
 	"app/database"
-	"app/domain/gateway"
+	"app/internal"
+	"app/internal/modules/gateway"
+	"app/internal/scheduler"
 )
 
 func Serve() {
 	config.InitializeAndSet()
 	database.InitializeAndConnect()
 
-	core.Initialize()
+	internal.Initialize()
 	engine.Initialize()
 
 	gateway.Initialize()

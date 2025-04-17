@@ -13,7 +13,7 @@ func init() {
 }
 
 var swagCmd = &cobra.Command{
-	Use:   "swag:init",
+	Use:   "swag",
 	Short: "Generate swagger document",
 	Long:  `This will parse your comments and generate the required files`,
 	Run: func(cmd *cobra.Command, args []string) {
